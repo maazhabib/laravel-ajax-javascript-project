@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Courses\CourseController;
+use App\Http\Controllers\Users\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +16,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('user');
 });
+
+Route::resource('/user' , UserController::class);
+
+Route::resource('/course' , CourseController::class);
