@@ -34,14 +34,12 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->phone }}</td>
-                        <td>{{ $user->course_id }}</td>
+                        <td>{{ $user->course->cname }}</td>
                         <td><a href="" class="btn btn-warning btn-sm">Edit</a></td>
                         <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
                     </tr>
-                    @php
-                    dd($user);
-                @endphp
                 @endforeach
+
             </tbody>
         </table>
     </div>

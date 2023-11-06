@@ -11,7 +11,7 @@
     <div class="container my-5">
         <h1>Courses</h1>
 
-        <a href=""><button class="btn btn-success">Add Course</button></a>
+        <a href="{{ route('course.create') }}"><button class="btn btn-success">Add Course</button></a>
         <a href="{{ route('user.index') }}"><button class="btn btn-info">show user</button></a>
 
         <table class="table table-hover table-dark my-2">

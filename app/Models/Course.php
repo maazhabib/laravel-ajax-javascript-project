@@ -9,8 +9,10 @@ class Course extends Model
 {
     use HasFactory;
 
-    public function user(){
-        return $this->hasMany(User::class);
-    }
+    protected $primaryKey = 'cid';
 
+    public function users()
+{
+    return $this->hasMany(User::class, 'course_id', 'cid' , 'cname');
+}
 }

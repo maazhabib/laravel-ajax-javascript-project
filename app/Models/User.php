@@ -41,7 +41,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function course(){
-        return $this->belongsTo(Course::class);
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'cid' , 'cname');
     }
 }
