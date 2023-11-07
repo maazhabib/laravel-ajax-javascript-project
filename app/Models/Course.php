@@ -12,7 +12,7 @@ class Course extends Model
     protected $primaryKey = 'cid';
 
     public function users()
-{
-    return $this->hasMany(User::class, 'course_id', 'cid' , 'cname');
-}
+    {
+        return $this->hasMany(User::class, 'course_id', 'cid' , 'cname' );
+    }
 }

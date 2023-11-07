@@ -21,9 +21,13 @@ class CourseController extends Controller
         }
 
 
-    public function store(Request $request)
+    public function store(Request $req)
         {
-            //
+            // dd($req);
+                $course = new Course();
+                $course->cname =$req->post('name');
+                $course->save();
+                return redirect()->route('course.index');
         }
 
 

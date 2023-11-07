@@ -28,7 +28,6 @@
             </thead>
             <tbody>
                 @foreach ($users as $user)
-
                     <tr>
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
@@ -36,12 +35,37 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->course->cname }}</td>
                         <td><a href="" class="btn btn-warning btn-sm">Edit</a></td>
-                        <td><a href="" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td><a href="" data-id="{{ $user->id }}" id="delete" class="btn btn-danger btn-sm ">Delete</a></td>
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
+
+    <script>
+
+          // Delete form
+
+          $('.delete').click(function(){
+             var id = $(this).attr("data-id");
+             swal({
+                title: "Are you sure?",
+               text: "Once deleted, you will not be able to recover this data!",
+               icon: "warning",
+              buttons: true,
+              dangerMode: true,
+           })
+           .then((willDelete) => {
+             if (willDelete) {
+                window.location.href="{{ route('user.destroy' , $user->id) }}";
+             }
+           });
+         });
+
+
+
+
+    </script>
+
 </body>
 </html>

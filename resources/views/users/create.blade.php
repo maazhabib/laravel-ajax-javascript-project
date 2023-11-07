@@ -11,8 +11,7 @@
 
     <div class="container my-5">
         <h1>ADD USER</h1>
-
-        <form method="POST" action="{{ route('user.store') }}">
+        <form id="user_form">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -28,16 +27,38 @@
             </div>
             <div class="mb-3">
                 <label class="form-label" for="course">Choose Courses:</label>
-                <select name="course" class="form-control"  >
-
-                    <option value=""></option>
-
+                <select name="course_id" class="form-control" >
+                    @foreach ($course as $corse)
+                        <option value="{{ $corse->cid }}">{{ $corse->cname }}</option>
+                    @endforeach
                 </select>
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $('#user_form').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('user.store') }}",
+                method:"POST",
+                data:$('#user_form').serialize(),
+                success: function (response)
+                {
+                    alert("User Added Successfully");
+                    window.location.href="{{ route('user.index') }}";
+                },
+                    error: function(err)
+                {
+                    console.error(`Error: ${err}`);
+                }
+            });
+        })
+    </script>
+
 
 </body>
 </html>

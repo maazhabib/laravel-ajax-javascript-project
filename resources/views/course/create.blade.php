@@ -10,17 +10,43 @@
 <body>
 
     <div class="container my-5">
-        <h1>ADD USER</h1>
+        <h1>ADD COURSE</h1>
 
-        <form method="POST" action="{{ route('course.store') }}">
+        <form id="frm">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" required>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="frmsubmit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+
+            // form submit
+        $('#frm').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('course.store') }}",
+                method:"POST",
+                data:$('#frm').serialize(),
+                success: function (response)
+                {
+                    alert("User Added Successfully");
+                    window.location.href="{{ route('course.index') }}";
+                },
+                    error: function(err)
+                {
+                    console.error(`Error: ${err}`);
+                }
+            });
+        })
+
+      
+
+    </script>
 </body>
 </html>

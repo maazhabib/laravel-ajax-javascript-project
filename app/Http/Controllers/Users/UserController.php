@@ -19,27 +19,19 @@ class UserController extends Controller
 
     public function create()
         {
-            return view('users.create');
+            return view('users.create')->with('course' , Course::all());
         }
 
 
     public function store(Request $req)
         {
-            $this->validate(request(),
-            [
-                'name' =>'required',
-                'email' =>'required',
-                'phone' =>'required',
-                'course' =>'required'
-            ]);
-
-                $todo = new User();
-                $todo->name = $req['name'];
-                $todo->email = $req['email'];
-                $todo->phone = $req['phone'];
-                $todo->course_id = $req['course'];
-                $todo->save();
-                return redirect()->route('user.index');
+            $users = new User();
+            $users->name =$req->post('name');
+            $users->email =$req->post('email');
+            $users->phone =$req->post('phone');
+            $users->course_id =$req->post('course_id');
+            $users->save();
+            return redirect()->route('course.index');
         }
 
 
@@ -61,8 +53,13 @@ class UserController extends Controller
         }
 
 
-    public function destroy($id)
+        public function destroy($id)
         {
-            //
+            dd($id);
+            $users = User::find($id);
+            $users->delete();
+            return response()->json([
+                'message' => 'Data deleted successfully!'
+      ]);
         }
 }
