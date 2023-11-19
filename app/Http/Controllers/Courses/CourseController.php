@@ -49,8 +49,22 @@ class CourseController extends Controller
         }
 
 
-    public function destroy($id)
+        public function destroy($id)
         {
-            //
+            try {
+                $course = Course::findOrFail($id);
+                $course->delete();
+                return response()->json([
+                    'success' => 'Record has been deleted successfully!'
+                ], 200);
+            } catch (\Exception $exception) {
+                $message = $exception->getMessage();
+                if(str_contains($message, 'No query results for model')) {
+                    $message = 'Course not found.';
+                }
+                return response()->json([
+                    'error' => $message
+                ], 400);
+            }
         }
 }
